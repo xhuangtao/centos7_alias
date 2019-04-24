@@ -3,7 +3,7 @@ For better management on the Linux of  centos7, I write the script. You can use 
 # 节省管理员输入的时间，特定的系统管理操作不需要再输入很长的组合命令
 例如：我们想查找占用的cpu最多的十个进程，一般的操作命令如下：ps aux  |  head  -1 ;  ps aux  | grep -v PID | sort -rn -k +3 |  head
 现在我们设置别名：alias topc='ps aux  |  head  -1 ;  ps aux  | grep -v PID | sort -rn -k +3 |  head'
-我们只需输入：topc 便可显示cpu最多的十个进程，并且从大到小排序。如果们只想显示占用cpu做多的前5个进程并排序，只需输入：topc -5
+我们只需输入：topc 便可显示占用cpu最多的十个进程，并且从大到小排序。如果们只想显示占用cpu做多的前5个进程并排序，只需输入：topc -5
 
 
 #  别名包含
