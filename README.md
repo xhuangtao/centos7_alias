@@ -13,8 +13,8 @@ For better management on the Linux of  centos7, I write the script. You can use 
 4, git 相关别名
 
 # 运行方式：
-1） git clone https://github.com/xhuangtao/centos7_alias
+1）user@linux# git clone https://github.com/xhuangtao/centos7_alias
 
-2）cd centos7_alias
+2）user@linux# cd centos7_alias
 
-3）source alias_for_centos7.sh
+3）user@linux# source alias_for_centos7.sh
