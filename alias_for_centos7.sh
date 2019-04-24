@@ -222,12 +222,14 @@ alias kgoyaml='kubectl get -o=yaml'
 # git   alias and function
 # ------------------------------------
 alias ga='git add '
+alias gp='git push '
 alias gb='git branch'
 alias gba='git branch -a'
 alias gbru='git remote prune origin'
 alias gbd='git branch -D'
 alias gc='git commit -m'
 alias gcl='git clone'
+alias gic='git clone '
 alias gco='git checkout'
 alias gcp='git cherry-pick'
 alias gclean='git fetch --prune'
@@ -318,3 +320,4 @@ fi
 #如果是文件直接cd到文件所在的目录，如果是目录直接到达该目录
 #if dir,cd into it. if file ,cd into where the file is
 goto(){ [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
+
