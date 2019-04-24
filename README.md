@@ -9,4 +9,5 @@ For better management on the Linux of  centos7, I write the script. You can use 
 #  别名包含
 1，Linux系统管理别名（包括文件，网络，系统等）
 2，docker 别名 （docker别名相关）
-3，k8s  别名 （k8s相关操作，通过lubectl）
+3，k8s  别名 （k8s相关操作，通过Kubectl）
+4, git 相关别名
