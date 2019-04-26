@@ -1,7 +1,7 @@
 #!/bin/bash
 # Author: Tony Huang  
 # Email: xhuangtao@126.com
-# change test4
+# change test5
 ###########################
 #  Linux system admin     #
 ##########################
@@ -13,6 +13,7 @@
 #unalias aliasname
 # life query
 alias tq="curl wttr.in"
+alias tq1='curl wttr.in/Yichang'
 # brew
 alias bs="brew services"
 alias bsl="brew services list"
