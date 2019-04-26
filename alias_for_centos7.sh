@@ -14,6 +14,7 @@
 # life query
 alias tq="curl wttr.in"
 alias tq1='curl wttr.in/Yichang'
+alias tq2='curl wttr.in/Wuhan'
 # brew
 alias bs="brew services"
 alias bsl="brew services list"
