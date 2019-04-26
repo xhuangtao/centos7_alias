@@ -1,7 +1,7 @@
 #!/bin/bash
 # Author: Tony Huang  
 # Email: xhuangtao@126.com
-# change test6
+# change test7
 ###########################
 #  Linux system admin     #
 ##########################
