@@ -1,7 +1,7 @@
 #!/bin/bash
 # Author: Tony Huang  
 # Email: xhuangtao@126.com
-# change test10
+
 ###########################
 #  Linux system admin     #
 ##########################
@@ -55,11 +55,11 @@ alias grep='grep --color=auto'
 # operate the Linux  file system  #对系统中文件和文件夹的操作
 alias l='ls -CF'
 alias ll='ls -al'   #ls相关，这里--color需要根据终端设
-alias lx='ls -lhBX'        #sort by extension
-alias lz='ls -lhrS'        #sort by size
-alias lt='ls -lhrt'        #sort by date    最常用到，ls -rt，按修改时间查看目录下文件
-alias lsd='ls -lhrt |grep "^d" '   #列出所有目录,按修改排序
-alias lsf='ls -lhrt |grep "^-" '   #列出所有文件,按修改排序
+alias lx='ls -lhBXa'        #sort by extension
+alias lz='ls -lhrSa'        #sort by size
+alias lt='ls -lhrta'        #sort by date    最常用到，ls -rt，按修改时间查看目录下文件
+alias lsd='ls -lhrta |grep "^d" '   #列出所有目录,按修改排序
+alias lsf='ls -lhrta |grep "^-" '   #列出所有文件,按修改排序
 alias sl='ls'
 # sort  the  files at . 按大小给当前目录下的文件排序
 alias lss='ls -alh | grep "^-" | sort -r -n -k 5 |grep M > /tmp/abc ; ls -alh | grep "^-" | sort -r -n -k 5 |grep K >> /tmp/abc ;ls -alh | grep "^-" | sort -r -n -k 5 |grep -v K|grep -v M  >> /tmp/abc ;cat /tmp/abc'
