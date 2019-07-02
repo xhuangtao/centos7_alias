@@ -1,7 +1,7 @@
 #!/bin/bash
 # Author: Tony Huang  
 # Email: xhuangtao@126.com
-# test11_0702fix1
+# test12_0702fix1
 ###########################
 #  Linux system admin     #
 ##########################
