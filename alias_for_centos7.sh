@@ -34,11 +34,12 @@ alias capp='rpm -qa | grep'
 alias cls='clear'
 alias c="clear"   #清屏
 alias cp='cp -i'
-alias cq='reboot'
+alias cq='reboot' # 重启拼音
+alias cqnet='service network restart' # 重启网络 # reboot network
 alias chux='chmod u+x'    #add execute permission to user
 # operate the Linux system  #对系统的操作
-alias dk='netstat -nlptu'
-alias dka='netstat -nlptua'
+alias dk='netstat -nlptu'   # 端口拼音   # Active Internet connections (servers and established)
+alias dka='netstat -nlptua'  # 端口拼音 # Active Internet connections (only servers)
 alias df="df -h"
 alias du0="du -h --max-depth=0"
 alias du1='du -h --max-depth=1'
@@ -112,6 +113,8 @@ alias pong='ping -c 5 '   #ping，限制
 # aira2 download
 alias download='aria2c'
 alias dl='aria2c'
+#### other linux aliases addtion
+alias h='hostname'
 # ------------------------------------
 # Docker alias and function
 # ------------------------------------
