@@ -1,11 +1,8 @@
 #!/bin/bash
 # Author: Tony Huang  
 # Email: xhuangtao@126.com
-<<<<<<< HEAD
-# test_0704fix2
-=======
-# test11_0704fix1
->>>>>>> 3fcc10084130d2892122ce8a3dad88ab60997e42
+
+# test_0704fix3-1540
 ###########################
 #  Linux system admin     #
 ##########################
