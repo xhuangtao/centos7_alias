@@ -1,7 +1,7 @@
 #!/bin/bash
 # Author: Tony Huang  
 # Email: xhuangtao@126.com
-# test_0704fix3-1708
+# test_0709fix1
 ###########################
 #  Linux system admin     #
 ##########################
@@ -15,6 +15,7 @@
 alias tq="curl wttr.in"
 alias tq1='curl wttr.in/Yichang'
 alias tq2='curl wttr.in/Wuhan'
+alias af="awk -F '\t' '{print NF}'"   #查看文件列数，用\t分隔，最常用，其实也可以搞个通用的，接收参数
 # brew
 alias bs="brew services"
 alias bsl="brew services list"
@@ -37,23 +38,27 @@ alias cp='cp -i'
 alias cq='reboot' # 重启拼音
 alias cqnet='service network restart' # 重启网络 # reboot network
 alias chux='chmod u+x'    #add execute permission to user
-# operate the Linux system  #对系统的操作
 alias dk='netstat -nlptu'   # 端口拼音   # Active Internet connections (servers and established)
 alias dka='netstat -nlptua'  # 端口拼音 # Active Internet connections (only servers)
 alias df="df -h"
 alias du0="du -h --max-depth=0"
 alias du1='du -h --max-depth=1'
 alias dus='du -h  --max-depth=1|sort -r -n -k 1 | grep M --color=auto > /tmp/show_an_sort_dir.tmp ; du -h --max-depth=1|sort -r -n -k 1| grep K --color=auto >> /tmp/show_an_sort_dir.tmp ; du -h --max-depth=1|sort -r -n -k 1| grep 0 --color=auto >> /tmp/show_an_sort_dir.tmp;cat /tmp/show_an_sort_dir.tmp'
+alias download='aria2c' # aira2 download
+alias dl='aria2c'
+alias diff='colordiff'  #比较文件不同，彩色显示
 alias egrep='egrep --color=auto'  
-alias findd='find -type d -name'  #find  the dirs 查找目录
-alias findf='find -type f -name'  #find  the files 查找文件
+alias findd='find -type d -name'  #find  the dirs 查找当前目录下的目录
+alias findf='find -type f -name'  #find  the files 查找当前目录下的文件
 alias free='free -m'
 alias f=' free -mhwt'
 alias fgrep='fgrep --color=auto'
 alias gj='poweroff -i'
 alias gr='grep --color=auto'
 alias grep='grep --color=auto'
-# operate the Linux  file system  #对系统中文件和文件夹的操作
+alias gor='go run'   #  for golang 
+alias gob='go build'   #  for golang 
+alias h='hostname'
 alias l='ls -CF'
 alias ll='ls -al'   #ls相关，这里--color需要根据终端设
 alias lx='ls -lhBXa'        #sort by extension
@@ -61,60 +66,80 @@ alias lz='ls -lhrSa'        #sort by size
 alias lt='ls -lhrta'        #sort by date    最常用到，ls -rt，按修改时间查看目录下文件
 alias lsd='ls -lhrta |grep "^d" '   #列出所有目录,按修改排序
 alias lsf='ls -lhrta |grep "^-" '   #列出所有文件,按修改排序
-alias sl='ls'
+alias last='last | head'  #最近访问用户
 # sort  the  files at . 按大小给当前目录下的文件排序
 alias lss='ls -alh | grep "^-" | sort -r -n -k 5 |grep M > /tmp/abc ; ls -alh | grep "^-" | sort -r -n -k 5 |grep K >> /tmp/abc ;ls -alh | grep "^-" | sort -r -n -k 5 |grep -v K|grep -v M  >> /tmp/abc ;cat /tmp/abc'
-alias mv='mv -i'
-alias now='date +"%Y-%m-%d %T"'
+alias mv='mv -i'  #立刻删除
+alias now='date +"%Y-%m-%d %T"'  #显示现在日期时间
 alias nt='netstat -anp'
 alias p='ps -ef'
 alias pi='ping www.baidu.com'
-alias psg='ps -ef|grep '
+alias pi5='ping -c 5 '   #ping，5次结束
+alias psg='ps -ef|grep -v grep|grep '  #需要排除grep程序
 alias pst='echo " Start time of the PID:  "; func(){  ps -p $1 -o lstart;};func'
 alias rdu='df -h |awk '\''$6~/^\/$/{print $5,$6}'\'' '
 alias rm='rm -i'
 alias rmlog='rm *.log;rm *.log.*'
-# operate the Linux system  #对系统的操作
-# operate the Linux system  #对系统的操作
+alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  #递归删除目录下所有pyc后缀文件
+alias rmlog='rm *.log;rm *.log.*'
 alias sethost='hostnamectl set-hostname $1'
 # sort  the DIRs at .  给当前目录排序
 alias sd='du -h  --max-depth=1|sort -r -n -k 1 | grep M --color=auto > /tmp/show_an_sort_dir.tmp ; du -h --max-depth=1|sort -r -n -k 1| grep K --color=auto >> /tmp/show_an_sort_dir.tmp ; du -h --max-depth=1|sort -r -n -k 1| grep 0 --color=auto >> /tmp/show_an_sort_dir.tmp;cat /tmp/show_an_sort_dir.tmp'
 # sort  the  files at . 给当前目录下的文件排序
 alias sf='ls -alh | grep "^-" | sort -r -n -k 5 |grep M > /tmp/abc ; ls -alh | grep "^-" | sort -r -n -k 5 |grep K >> /tmp/abc ;ls -alh | grep "^-" | sort -r -n -k 5 |grep -v K|grep -v M  >> /tmp/abc ;cat /tmp/abc'
 alias show='ls -al'
-alias sip='ip addr show |grep -E "inet"|grep -E  "eth0|ens33"'
-alias sipa='ip addr show|grep "inet"| grep -v "inet6"'
-alias topc='ps aux  |  head  -1 ;  ps aux  | grep -v PID | sort -rn -k +3 |  head'
-alias topm='ps aux |  head -1 ; ps aux | grep -v PID | sort -rn -k +4 | head'
+alias sip='ip addr show |grep -E "inet"|grep -E  "eth0|ens33"' #显示所有ip信息
+alias sipa='ip addr show|grep "inet"| grep -v "inet6"' # #显示所有ip信息，包括本机
+alias ssh='ssh -2'
+alias sl='ls'
+alias topc='ps aux  |  head  -1 ;  ps aux  | grep -v PID | sort -rn -k +3 |  head' #显示最占用CPU的进程，并降序排序
+alias topm='ps aux |  head -1 ; ps aux | grep -v PID | sort -rn -k +4 | head'   #显示最占用mem内存的进程，并降序排序
 alias tree='tree -C'
+alias tf='tail -f'  #动态查看文件变化
 alias vi='vim'
-alias version='cat /proc/version ; cat /etc/redhat-release'
-alias ver='cat /proc/version ; cat /etc/redhat-release'
+alias version='cat /proc/version ; cat /etc/redhat-release'  #显示本机的相关版本信息
+alias ver='cat /proc/version ; cat /etc/redhat-release' #显示本机的相关版本信息
 alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
 alias wl='wc -l'    #统计行数
-# need to yum install bridge-utils -y  first 查看系统网桥
-alias wgc='brctl show'   #show all gateway 
-# ------------------------------------
-#  others   其他相关 xhuangtao@126.com
-# ------------------------------------
-alias tf='tail -f'  #动态查看文件变化
-alias af="awk -F '\t' '{print NF}'"   #查看文件列数，用\t分隔，最常用，其实也可以搞个通用的，接收参数
+alias wgc='brctl show'   # 查看系统网桥 need to "yum install bridge-utils -y"  first 
 alias wl='wc -l'    #统计行数
-alias last='last | head'
-alias diff='colordiff'
-alias gor='go run'
-alias gob='go build'
-alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  #递归删除目录下所有pyc
-alias rmlog='rm *.log;rm *.log.*'
-alias now='date +"%Y-%m-%d %T"'
-alias ms='mysql -uroot --password="123456"'    #进入mysql 密码先设置 
-alias ssh='ssh -2'
-alias pong='ping -c 5 '   #ping，限制
-# aira2 download
-alias download='aria2c'
-alias dl='aria2c'
-#### other linux aliases addtion
-alias h='hostname'
+
+# ------------------------------------
+# git   alias and function
+# ------------------------------------
+alias g='git '    #git命令
+alias ga='git add '  
+alias ga='git init'   #git目录初始化
+alias gp='git push '  #推送修改
+alias gb='git branch'  #显示git本地分支
+alias gba='git branch -a -v' #显示git所有分支
+alias gbru='git remote prune origin'
+alias gbd='git branch -D'
+alias gbdr='git push origin --delete'  #delete remote branch  删除远程分支
+alias gc='git commit -m'  
+alias gd='git diff'
+alias grs='git remote show origin' #查看有关于origin的一些信息，包括分支是否tracking。
+alias grp='git remote prune origin' #删除本地有但在远程库已经不存在的分支。
+alias gcl='git clone' # 克隆git项目
+alias gic='git clone' # 克隆git项目
+alias gch='git checkout'   #切换分支或恢复工作树文件
+alias gcp='git cherry-pick' #合并某个commit
+alias gclean='git fetch --prune'
+alias gr='git rm'  #删除暂存区或分支上的文件
+alias gs='git status' #git状态
+alias gss='git status -s' #以精简的方式显示文件状态。
+alias gl='git log'  #显示git的最近提交的信息
+alias gm='git merge --no-ff' #可以保存你之前的分支历史。能够更好的查看 merge历史，以及branch 状态
+alias grv='git remote -v'  #远程版本
+alias gup='git add .; git commit -m "update" ;git push'  #一步增减至缓存区、提交、推送
+alias gd1='echo "git diff HEAD"; git diff HEAD'
+alias gd2='echo "git diff HEAD^"; git diff HEAD^'
+alias gdown='git fetch && git rebase'  #下载源码覆盖当下
+#alias gdv='git diff -w "$@" | vim -R -'
+#alias gcount='git shortlog -sn'
+#alias gexport='git archive --format zip --output'
+#alias gmu='git fetch origin -v; git fetch upstream -v; git merge upstream/master'
+
 # ------------------------------------
 # Docker alias and function
 # ------------------------------------
@@ -223,44 +248,6 @@ alias kgns='kubectl get namespaces'
 alias kdns='kubectl describe namespaces'
 alias krmns='kubectl delete namespaces'
 alias kgoyaml='kubectl get -o=yaml'
-# ------------------------------------
-# git   alias and function
-# ------------------------------------
-alias ga='git add '
-alias gp='git push '
-alias gb='git branch'
-alias gba='git branch -a'
-alias gbru='git remote prune origin'
-alias gbd='git branch -D'
-alias gc='git commit -m'
-alias gcl='git clone'
-alias gic='git clone '
-alias gco='git checkout'
-alias gcp='git cherry-pick'
-alias gclean='git fetch --prune'
-alias gd='git diff'
-alias gdi='git di'
-alias gr='git rm'
-alias gs='git status'
-alias gss='git status -s'
-alias gl='git log'
-alias gll='git lg'
-alias gull='git pull origin'
-alias gush='git push origin'
-alias gt='git checkout'
-alias gtd='git checkout develop'
-alias gm='git merge --no-ff'
-alias grv='git remote -v'
-
-#alias gd1='echo "git diff HEAD"; git diff HEAD'
-#alias gd2='echo "git diff HEAD^"; git diff HEAD^'
-#alias gsa='git submodule add'
-#alias gsu='git submodule update --init'
-#alias gup='git fetch && git rebase'
-#alias gdv='git diff -w "$@" | vim -R -'
-#alias gcount='git shortlog -sn'
-#alias gexport='git archive --format zip --output'
-#alias gmu='git fetch origin -v; git fetch upstream -v; git merge upstream/master'
 
 # ------------------------------------
 # useful functions
@@ -322,11 +309,107 @@ else
     history | awk '{print $4}' | sort | uniq -c | sort -nr | head -n 10
 fi
 }
-#如果是文件直接cd到文件所在的目录，如果是目录直接到达该目录
-#if dir,cd into it. if file ,cd into where the file is
-goto(){ [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
+#如果是文件直接cd到文件所在的目录，如果是目录直接到达该目录,只能对当前目录的子目录操作不完善
+#goto() { 
+#     dirname=$(find  -depth  -name $1)
+#     cd $dirname;
+
+# }
 
 insjenkins(){
     wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
     
 }
+# add 20190714
+echo_color() {
+    if [ $1 == "green" ]; then
+        echo -e "\033[32;40m$2\033[0m"
+    elif [ $1 == "red" ]; then
+        echo -e "\033[31;40m$2\033[0m"
+    fi
+}
+# add 20190714  pings直接检查ping通的情况,IP_LIST中填写IP或域名地址
+# link：https://mp.weixin.qq.com/s/A3z0E8bZaE4gi6VYASEzmQ
+pings(){
+   pingc() {
+    if ping -c 1 $IP >/dev/null; then
+        echo "$IP Ping is successful."
+        continue
+    fi
+  }
+  IP_LIST="www.qq.com www.baidu.com 192.168.109.1"
+  for IP in $IP_LIST; do
+    pingc
+    pingc
+    pingc
+    echo "$IP Ping is failure!"
+  done
+}
+random(){
+  if [ ! -n "$1" ]
+  then
+   echo "please input the random number after it: random 8 ";  #判断是否输入参数
+     else
+      if [[ $1 == *[!0-9]* ]]; then
+         echo "please input a number after 'random' command,like: random 12 "; #判断是否为正整数
+        else
+        if    [ "$1" -le 24 ]   # 24位以内的随机数
+        then
+         #方法1：
+          echo $RANDOM |md5sum |cut -c 1-$1 ;
+         #方法2：
+         cat /proc/sys/kernel/random/uuid |cut -c 1-$1 ;
+         else         
+           if [ "$1" -le 64 ] # 24~64位的随机数
+             then  #方法3：
+               declare -i num=$1-2;
+               openssl rand -base64  $num|cut -c 1-$1 |head -1;
+             else   #多余64位的随机数
+               declare -i num=$1-2;  #方法3：
+               openssl rand -base64  $num|cut -c 1-$1 ;
+                if [ "$1" -gt 1024 ]
+                   then 
+                     echo "the random number is too big!"
+               fi
+           fi
+     fi
+  fi
+fi
+}
+
+cip(){
+    IP=$1
+    if [[ $IP =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+        FIELD1=$(echo $IP|cut -d. -f1)
+        FIELD2=$(echo $IP|cut -d. -f2)
+        FIELD3=$(echo $IP|cut -d. -f3)
+        FIELD4=$(echo $IP|cut -d. -f4)
+        if [ $FIELD1 -le 255 -a $FIELD2 -le 255 -a $FIELD3 -le 255 -a $FIELD4 -le 255 ]; then
+            echo "$IP is an IP."
+        else
+            echo "$IP is not IP!"
+        fi
+    else
+        echo "Format error!"
+    fi
+}
+#check if it's numbers
+cnum() {
+if [[ $1 =~ ^[0-9]+$ ]]; then
+    echo "$1 is Number."
+else
+    echo "$1 is NOT a Number."
+fi
+}
+#给定目录找出包含关键字的文件,查找特定目录先得包含特定关键字的文件
+#find sting in some dir
+finds() {
+DIR=$1
+KEY=$2
+for FILE in $(find $DIR -type f); do
+    if grep $KEY $FILE &>/dev/null; then
+        echo "--> $FILE"
+    fi
+done
+}
+
